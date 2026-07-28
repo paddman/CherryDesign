@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#6d4aff" />
+    <meta
+      name="description"
+      content="CherryDesign — เครื่องมือออกแบบออนไลน์สำหรับทีมที่อยากทำงานให้เร็วและสวย"
+    />
+    <title>CherryDesign — Creative editor</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-lockup" aria-label="CherryDesign home">
+          <div class="brand-mark" aria-hidden="true"><span></span><span></span></div>
+          <div>
+            <div class="brand-name">CherryDesign</div>
+            <div class="brand-subtitle">Create boldly</div>
+          </div>
+        </div>
+
+        <div class="document-title">
+          <span class="document-type">Untitled design</span>
+          <input id="documentTitle" value="Cherry social campaign" aria-label="ชื่อไฟล์งาน" />
+        </div>
+
+        <div class="topbar-actions">
+          <div class="save-status"><span class="save-dot"></span><span id="saveStatus">บันทึกแล้ว</span></div>
+          <button class="button button-ghost" id="previewButton" type="button">
+            <span class="icon" data-icon="play"></span>
+            ดูตัวอย่าง
+          </button>
+          <div class="export-wrap">
+            <button class="button button-primary" id="exportButton" type="button">
+              <span class="icon" data-icon="download"></span>
+              ส่งออก
+              <span class="icon icon-small" data-icon="chevron-down"></span>
+            </button>
+            <div class="export-menu" id="exportMenu" hidden>
+              <button type="button" data-export="png"><span class="icon" data-icon="image"></span> ดาวน์โหลด PNG</button>
+              <button type="button" data-export="svg"><span class="icon" data-icon="code"></span> ดาวน์โหลด SVG</button>
+            </div>
+          </div>
+          <button class="avatar-button" type="button" aria-label="บัญชีผู้ใช้">P</button>
+        </div>
+      </header>
+
+      <div class="editor-shell">
+        <aside class="tool-sidebar" aria-label="เครื่องมือหลัก">
+          <button class="sidebar-tool is-active" data-panel="templates" type="button">
+            <span class="tool-icon" data-icon="layout"></span><span>เทมเพลต</span>
+          </button>
+          <button class="sidebar-tool" data-panel="elements" type="button">
+            <span class="tool-icon" data-icon="shapes"></span><span>องค์ประกอบ</span>
+          </button>
+          <button class="sidebar-tool" data-panel="text" type="button">
+            <span class="tool-icon" data-icon="type"></span><span>ข้อความ</span>
+          </button>
+          <button class="sidebar-tool" data-panel="uploads" type="button">
+            <span class="tool-icon" data-icon="upload"></span><span>อัปโหลด</span>
+          </button>
+          <button class="sidebar-tool" data-panel="brand" type="button">
+            <span class="tool-icon" data-icon="sparkles"></span><span>แบรนด์</span>
+          </button>
+          <div class="sidebar-spacer"></div>
+          <button class="sidebar-tool sidebar-help" type="button" id="helpButton">
+            <span class="tool-icon" data-icon="help"></span><span>ช่วยเหลือ</span>
+          </button>
+        </aside>
+
+        <aside class="asset-panel" id="assetPanel" aria-label="คลังออกแบบ">
+          <div class="panel-heading">
+            <div>
+              <div class="eyebrow">CHERRY STUDIO</div>
+              <h2 id="panelTitle">เทมเพลต</h2>
+            </div>
+            <button class="icon-button" type="button" id="closePanelButton" aria-label="ย่อแผง"><span class="icon" data-icon="panel-left"></span></button>
+          </div>
+          <div class="panel-search">
+            <span class="icon" data-icon="search"></span>
+            <input id="assetSearch" type="search" placeholder="ค้นหาเทมเพลต องค์ประกอบ..." aria-label="ค้นหา" />
+            <kbd>/</kbd>
+          </div>
+          <div class="asset-panel-content" id="assetPanelContent"></div>
+        </aside>
+
+        <main class="workspace" aria-label="พื้นที่ออกแบบ">
+          <div class="editor-toolbar">
+            <div class="toolbar-group">
+              <button class="toolbar-button" id="undoButton" type="button" aria-label="ย้อนกลับ" title="ย้อนกลับ (Ctrl/Cmd + Z)"><span class="icon" data-icon="undo"></span></button>
+              <button class="toolbar-button" id="redoButton" type="button" aria-label="ทำซ้ำ" title="ทำซ้ำ (Ctrl/Cmd + Shift + Z)"><span class="icon" data-icon="redo"></span></button>
+              <span class="toolbar-divider"></span>
+              <button class="toolbar-button" id="gridButton" type="button" aria-label="แสดงกริด" title="แสดงกริด"><span class="icon" data-icon="grid"></span></button>
+            </div>
+            <div class="toolbar-center">
+              <span class="selection-label" id="selectionLabel">เลือกองค์ประกอบเพื่อเริ่มปรับแต่ง</span>
+            </div>
+            <div class="toolbar-group zoom-group">
+              <button class="toolbar-button" id="zoomOutButton" type="button" aria-label="ซูมออก"><span class="icon" data-icon="minus"></span></button>
+              <button class="zoom-value" id="zoomValue" type="button">68%</button>
+              <button class="toolbar-button" id="zoomInButton" type="button" aria-label="ซูมเข้า"><span class="icon" data-icon="plus"></span></button>
+              <button class="toolbar-button" id="fitButton" type="button" aria-label="พอดีหน้าจอ" title="พอดีหน้าจอ"><span class="icon" data-icon="maximize"></span></button>
+            </div>
+          </div>
+
+          <div class="canvas-stage" id="canvasStage">
+            <div class="stage-hint stage-hint-top"><span class="hint-dot"></span> พื้นที่ทำงานของคุณ</div>
+            <div class="canvas-wrap" id="canvasWrap">
+              <div class="design-canvas" id="designCanvas" tabindex="0" aria-label="ผืนผ้าใบออกแบบ">
+                <div class="canvas-elements" id="canvasElements"></div>
+              </div>
+            </div>
+            <div class="stage-hint stage-hint-bottom">1080 × 720 px <span>•</span> Social landscape</div>
+          </div>
+
+          <div class="workspace-footer">
+            <div class="footer-tip"><span class="icon" data-icon="lightbulb"></span> เคล็ดลับ: ลากองค์ประกอบเพื่อจัดวาง หรือกด <kbd>Delete</kbd> เพื่อลบ</div>
+            <div class="footer-actions">
+              <button class="footer-button" id="duplicateFooterButton" type="button"><span class="icon" data-icon="copy"></span> ทำสำเนา</button>
+              <button class="footer-button footer-button-danger" id="clearButton" type="button"><span class="icon" data-icon="trash"></span> ล้างงาน</button>
+            </div>
+          </div>
+        </main>
+
+        <aside class="inspector" id="inspector" aria-label="แผงปรับแต่ง"></aside>
+      </div>
+    </div>
+
+    <input id="fileInput" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden />
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <div class="modal-backdrop" id="previewModal" hidden>
+      <div class="preview-modal" role="dialog" aria-modal="true" aria-labelledby="previewTitle">
+        <div class="preview-header">
+          <div>
+            <div class="eyebrow">PREVIEW MODE</div>
+            <h2 id="previewTitle">Cherry social campaign</h2>
+          </div>
+          <button class="icon-button" id="closePreviewButton" type="button" aria-label="ปิดตัวอย่าง"><span class="icon" data-icon="x"></span></button>
+        </div>
+        <div class="preview-stage"><div class="preview-canvas" id="previewCanvas"></div></div>
+        <div class="preview-footer"><span>กด Esc เพื่อออกจากโหมดตัวอย่าง</span><button class="button button-primary" id="previewExportButton" type="button"><span class="icon" data-icon="download"></span> ส่งออก PNG</button></div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
